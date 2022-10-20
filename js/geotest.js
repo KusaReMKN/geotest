@@ -31,6 +31,19 @@ function initGeolocation()
 				enableHighAccuracy: true
 			}
 		);
+		navigator.geolocation.watchPosition(
+			pos => {
+				const k = [ pos.coords.latitude, pos.coords.longitude ];
+				L.marker(k).addTo(map);
+				map.setView(k, 15);
+			},
+			err => {
+				alert(`Error: ${err.message}`);
+			},
+			{
+				enableHighAccuracy: true
+			}
+		);
 	} else {
 		alert('Geolocation API is not available');
 	}
